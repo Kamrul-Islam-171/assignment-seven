@@ -3,6 +3,9 @@ import Card from "../Card/Card";
 import Table from "../Table/Table";
 import Table2 from "../Table/Table2";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Main = () => {
 
@@ -22,8 +25,8 @@ const Main = () => {
     const handleWantTocook = (food) => {
         const isExist = wantToCook.find(item => item.recipe_id === food.recipe_id);
         if(isExist) {
-            alert('Already added!');
-            return;
+            // alert('Already added!');
+            return toast("Already Added!");
         }
         setWantToCook([...wantToCook, food]);
     }
@@ -72,6 +75,7 @@ const Main = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer />
 
 
 
