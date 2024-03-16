@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const Table = ({ food, handlePreparing }) => {
 
-    console.log("form = ", food);
+    // console.log("form = ", food);
     return (
         <div className="mt-4">
             <div className="overflow-x-auto">
