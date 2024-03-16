@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
 
 
-
-const Table2 = () => {
+const Table2 = ({ preparing }) => {
+    
     return (
         <div className="mt-4">
             <div className="overflow-x-auto">
@@ -17,25 +18,27 @@ const Table2 = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        <tr className="bg-base-200">
-                            <th>1</th>
-                            <td>Chicken Caesar Salad</td>
-                            <td>20 minutes</td>
-                            <td>400 calories</td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr>
-                            <th>1</th>
-                            <td>Chicken Caesar Salad</td>
-                            <td>20 minutes</td>
-                            <td>400 calories</td>
-                        </tr>
-                        
+                        {
+                            preparing.map((item, idx) =>
+                                <tr key={idx} className="bg-base-200">
+                                    <th>{idx + 1}</th>
+                                    <td>{item.recipe_name}</td>
+                                    <td>{item.preparing_time} minutes</td>
+                                    <td>{item.calories} calories</td>
+                                </tr>
+                            )
+                        }
+
+
                     </tbody>
                 </table>
             </div>
         </div>
     );
 };
+
+Table2.propTypes = {
+    preparing : PropTypes.array.isRequired
+}
 
 export default Table2;

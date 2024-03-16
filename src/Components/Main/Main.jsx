@@ -8,6 +8,9 @@ const Main = () => {
 
     const [foods, setFoods] = useState([]);
     const [wantToCook, setWantToCook] = useState([]);
+    const [preparing, setPreparing] = useState([]);
+    const [totalTime, setTotalTime] = useState(0);
+    const [totalCalories, setTotalCalories] = useState(0);
 
 
     useEffect(() => {
@@ -24,7 +27,16 @@ const Main = () => {
         }
         setWantToCook([...wantToCook, food]);
     }
-    console.log(wantToCook);
+    
+    const handlePreparing = (food) => {
+        const newCook = wantToCook.filter(item => item.recipe_id !== food.recipe_id);
+        setWantToCook(newCook);
+        const newTime = totalTime + food.preparing_time;
+        setTotalTime(newTime);
+        const newCalories = totalCalories + food.calories;
+        setTotalCalories(newCalories);
+        setPreparing([...preparing, food]);
+    }
     return (
         <>
             <section className="container mx-auto mt-20 text-center  flex flex-col items-center space-y-5">
@@ -44,19 +56,19 @@ const Main = () => {
                             <hr />
                         </div>
                         <div className="text-[#878787]">
-                            <Table food = {wantToCook}></Table>
+                            <Table handlePreparing = {handlePreparing} food = {wantToCook}></Table>
                         </div>
                         <div>
-                            <h1 className="text-center text-2xl font-semibold mb-4 mt-4" >Currently cooking: 02</h1>
+                            <h1 className="text-center text-2xl font-semibold mb-4 mt-4" >Currently cooking: {preparing.length}</h1>
                             <hr />
                         </div>
                         <div className="text-[#878787]">
-                            <Table2></Table2>
+                            <Table2 preparing = {preparing}></Table2>
 
                         </div>
                         <div className=" flex justify-end gap-5 mt-6 text-[#878787] font-bold">
-                            <p>Total Time = 45 minutes</p>
-                            <p>Total Calories = 1050 calories</p>
+                            <p>Total Time = {totalTime} minutes</p>
+                            <p>Total Calories = {totalCalories} calories</p>
                         </div>
                     </div>
                 </div>

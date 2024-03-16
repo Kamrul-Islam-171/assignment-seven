@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Table = ({ food }) => {
+const Table = ({ food, handlePreparing }) => {
 
     console.log("form = ", food);
     return (
@@ -26,7 +26,7 @@ const Table = ({ food }) => {
                                 <td>{item.recipe_name}</td>
                                 <td>{item.preparing_time} minutes</td>
                                 <td>{item.calories} calories</td>
-                                <td><button className="btn rounded-full px-3 font-medium bg-[#0BE58A] border-none outline-none">Preparing</button></td>
+                                <td><button onClick={() => handlePreparing(item)} className="btn rounded-full px-3 font-medium bg-[#0BE58A] border-none outline-none">Preparing</button></td>
                             </tr>)
 
                         }
@@ -39,7 +39,8 @@ const Table = ({ food }) => {
 };
 
 Table.propTypes = {
-    food: PropTypes.array.isRequired
+    food: PropTypes.array.isRequired, 
+    handlePreparing : PropTypes.func.isRequired
 }
 
 export default Table;
