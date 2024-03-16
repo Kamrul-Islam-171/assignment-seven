@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 
+const Table = ({ food }) => {
 
-const Table = () => {
+    console.log("form = ", food);
     return (
         <div className="mt-4">
             <div className="overflow-x-auto">
@@ -14,20 +16,30 @@ const Table = () => {
                             <th>Calories</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        {/* row 1 */}
-                        <tr className="bg-base-200">
-                            <th>1</th>
-                            <td>Chicken Caesar Salad</td>
-                            <td>20 minutes</td>
-                            <td>400 calories</td>
-                            <td><button className="btn rounded-full px-3 font-medium bg-[#0BE58A] border-none outline-none">Preparing</button></td>
-                        </tr>
+
+                        {
+
+                            food.map((item, idx) => <tr key={idx} className="bg-base-200">
+                                <th>{idx + 1}</th>
+                                <td>{item.recipe_name}</td>
+                                <td>{item.preparing_time} minutes</td>
+                                <td>{item.calories} calories</td>
+                                <td><button className="btn rounded-full px-3 font-medium bg-[#0BE58A] border-none outline-none">Preparing</button></td>
+                            </tr>)
+
+                        }
+
                     </tbody>
                 </table>
             </div>
         </div>
     );
 };
+
+Table.propTypes = {
+    food: PropTypes.array.isRequired
+}
 
 export default Table;
